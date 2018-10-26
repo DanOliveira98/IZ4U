@@ -1,3 +1,34 @@
+<?php
+    $daniel = mysqli_connect("localhost","root","","IZ4U");
+    if(mysqli_connect_errno()){
+        die("Conexao Falhou: ". mysqli_connect_errno);
+        
+    }
+
+?> 
+<?php
+   if ( isset($_POST["username"]) ) {
+   		$username = $_POST["username"];
+   		$password = $_POST["password"];
+
+   		$login = "SELECT * FROM usuario WHERE cpd = '{$username}' and senha = '{$password}' ";
+   		$acesso = mysqli_query($daniel, $login);
+   		if ( !acesso ) {
+				die("Conexao Falhou");   			
+   		}
+
+   		$infor = mysqli_fetch_assoc($acesso);
+
+   		if ( empty($infor)) {
+   			$msg = "Login não efetuado!";
+   		} else{
+   			header("location:index.html");
+
+   		}
+   		}
+
+?> 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,7 +77,7 @@
 	<div class="format-pg">
 	  <div class="grid">
 
-	    <form action="https://httpbin.org/post" method="POST" class="form login">
+	    <form action="login.php" method="POST" class="form login">
 
 	      <div class="form__field">
 	        <label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">CPD/MATRICULA</span></label>
@@ -54,16 +85,32 @@
 	      </div>
 
 	      <div class="form__field">
-	        <label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Senha</span></label>
+	        <label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">SENHA</span></label>
 	        <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
 	      </div>
 
 	      <div class="form__field">
 	        <input type="submit" value="Sign In">
 	      </div>
+		
+
+		<?php
+	  	if (isset ($msg) ) {
+	  	?>
+	  		<p>
+	  			<?php echo $msg
+
+	  			?>
+
+	  		</p>
+	  	<?php 
+	  	}
+
+	 	?>
+
 
 	    </form>
-
+		
 	    <p class="text--center">Sem Cadastro? <a href="Cadastro.html">Cadastre</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
 
 	  </div>
@@ -71,3 +118,7 @@
 	  </div>
 </body>
 </html>
+<?php
+		mysqli_close($daniel);
+
+?>

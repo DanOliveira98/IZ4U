@@ -1,3 +1,29 @@
+<?php
+    $daniel = mysqli_connect("localhost","root","","IZ4U");
+    if(mysqli_connect_errno()){
+        die("Conexao Falhou: ". mysqli_connect_errno);
+        
+    }
+    if ( isset($_POST["cpd"]) ) {
+    	$cpd = $_POST["cpd"];
+    	$nome = $_POST["nome"];
+    	$Telefone = $_POST["Telefone"];
+    	$curso = $_POST["Curso"];
+    	$Semestre = $_POST["semestre"];
+    	$Email = $_POST["Email"];
+    	$Senha = $_POST["Senha"];
+    	$conf_Senha = $_POST["conf_Senha"];
+    	if ($Senha == $conf_Senha) {
+    		$sen = $Senha;
+    	}else{
+    		die("Senha Incorreta!");
+    	}
+
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,31 +81,35 @@
 			  <h1>Registre-se!</h1>
 			  <p>Seu cadastro é fundamental e Obrigatório para que você possa lançar ou responder alguma dúvida!</p>
 			  <form class="form" method="post" action="yourpage.html">
-			  	  <input type="text" class="cpd" placeholder="CPD">
+			  	  <input type="text" name="cpd" class="name" placeholder="CPD">
 			    <div>
 			      <p class="name-help">Por favor informe seu cpd.</p>
 			    </div>
-			    <input type="text" class="name" placeholder="Name">
+			    <input type="text" name="nome" class="name" placeholder="Nome">
 			    <div>
 			      <p class="name-help">Por favor informe seu nome completo.</p>
 			    </div>
-			    <input type="text" class="Telefone" placeholder="Telefone">
+			    <input type="text" name="Telefone" class="name" placeholder="Telefone">
 			    <div>
 			      <p class="name-help">Por favor informe seu nome completo.</p>
 			    </div>
-			    <input type="text" class="Curso" placeholder="Curso">
+			    <input type="text" name="Curso" class="name" placeholder="Curso">
 			    <div>
 			      <p class="name-help">Por favor informe seu curso.</p>
 			    </div>
-			    <input type="password" class="Senha" placeholder="Senha">
+			    <input type="text" name="semestre" class="name" placeholder="Semestre">
+			    <div>
+			      <p class="name-help">Por favor informe seu curso.</p>
+			    </div>
+			    <input type="password" name="Senha" class="name" placeholder="Senha">
 			    <div>
 			      <p class="name-help">Por favor informe seu nome completo.</p>
 			    </div>
-			    <input type="password" class="conf_Senha" placeholder="Confirmar Senha">
+			    <input type="password" name="conf_Senha" class="name" placeholder="Confirmar Senha">
 			    <div>
 			      <p class="name-help">Por favor informe seu nome completo.</p>
 			    </div>
-			    <input type="email" class="email" placeholder="Email">
+			    <input type="email" name="Email" class="Email" placeholder="Email">
 			     <div>
 			      <p class="email-help">Please enter your current email address.</p>
 			    </div>
@@ -89,3 +119,8 @@
 </div>
 </body>
 </html>
+
+<?php
+	mysqli_close($daniel);
+
+?>
