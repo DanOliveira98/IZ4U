@@ -1,31 +1,23 @@
 <?php
-    $daniel = mysqli_connect("localhost","root","","IZ4U");
+session_start();
+    $daniel = mysqli_connect("localhost","root","","iz4you");
     if(mysqli_connect_errno()){
         die("Conexao Falhou: ". mysqli_connect_errno);
         
     }
-
-?> 
-<?php
    if ( isset($_POST["username"]) ) {
    		$username = $_POST["username"];
    		$password = $_POST["password"];
 
-   		$login = "SELECT * FROM usuario WHERE cpd = '{$username}' and senha = '{$password}' ";
+   		$login = "SELECT usuarioID, Nome, IzCoins, Curso FROM usuario WHERE cpd = '{$username}' and senha = '{$password}' ";
    		$acesso = mysqli_query($daniel, $login);
-   		if ( !acesso ) {
-				die("Conexao Falhou");   			
-   		}
-
-   		$infor = mysqli_fetch_assoc($acesso);
-
-   		if ( empty($infor)) {
-   			$msg = "Login não efetuado!";
-   		} else{
-   			header("location:index.html");
-
-   		}
-   		}
+   		$row = mysqli_num_rows($acesso);
+   				if($row == 1){
+   					$_SESSION['usuario'] = $username;
+   					header('Location:/IZ4U/HTML/Perfil.php');
+   					exit();
+   				}
+   		}	
 
 ?> 
 
@@ -51,7 +43,7 @@
 				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				    <ul class="navbar-nav mr-auto">
 				      <li class="nav-item active">
-				        <a class="nav-link" href="Perfil.html">Perfil<span class="sr-only">(current)</span></a>
+				        <a class="nav-link" href="Perfil.php">Perfil<span class="sr-only">(current)</span></a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link" href="Rank.html">Ranking</a>
@@ -69,7 +61,7 @@
 				        </div>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link disabled" href="Cadastro.html">Cadastro</a>
+				        <a class="nav-link disabled" href="Cadastro.php">Cadastro</a>
 				      </li>
 				    </ul>
 				  </div>
@@ -77,7 +69,7 @@
 	<div class="format-pg">
 	  <div class="grid">
 
-	    <form action="login.php" method="POST" class="form login">
+	    <form action="" method="POST" class="form login">
 
 	      <div class="form__field">
 	        <label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">CPD/MATRICULA</span></label>
@@ -92,21 +84,6 @@
 	      <div class="form__field">
 	        <input type="submit" value="Sign In">
 	      </div>
-		
-
-		<?php
-	  	if (isset ($msg) ) {
-	  	?>
-	  		<p>
-	  			<?php echo $msg
-
-	  			?>
-
-	  		</p>
-	  	<?php 
-	  	}
-
-	 	?>
 
 
 	    </form>
