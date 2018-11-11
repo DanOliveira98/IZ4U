@@ -82,6 +82,7 @@
                                          ?>
                                                 	
                                      </a></h2>
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Some Name</a></h2>
                                     <h6 class="d-block"><a href="javascript:void(0)"></a> IzPoints</h6>
                                     <h6 class="d-block"><a href="javascript:void(0)"></a> Perguntas Respondidas</h6>
                                 </div>
@@ -100,7 +101,7 @@
                                 </ul>
                                 <div class="tab-content ml-1" id="myTabContent">
                                     <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-                                       
+                  
                                         <div class="row">
                                             <div class="col-sm-3 col-md-2 col-5">
                                                 <label style="font-weight:bold;">Nome Completo</label>
@@ -112,6 +113,9 @@
                                             </div>
                                         </div>
                                         <?php ?>
+                                                <?php $nome ?>
+                                            </div>
+                                        </div>
                                         <hr />
 
                                         <div class="row">
@@ -157,9 +161,11 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+</html>
 </html>

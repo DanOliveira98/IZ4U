@@ -10,6 +10,7 @@ session_start();
    		$password = $_POST["password"];
 
    		$login = "SELECT usuarioID, Nome, IzCoins, Curso FROM usuario WHERE cpd = '{$username}' and senha = '{$password}' limit 1";
+   		$login = "SELECT usuarioID, Nome, IzCoins, Curso FROM usuario WHERE cpd = '{$username}' and senha = '{$password}' ";
    		$acesso = mysqli_query($daniel, $login);
    		$row = mysqli_num_rows($acesso);
    				if($row == 1){
