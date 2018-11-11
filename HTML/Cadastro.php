@@ -1,29 +1,10 @@
 <?php
-    $daniel = mysqli_connect("localhost","root","","IZ4U");
+    $daniel = mysqli_connect("localhost","root","","iz4you");
     if(mysqli_connect_errno()){
         die("Conexao Falhou: ". mysqli_connect_errno);
         
     }
-    if ( isset($_POST["cpd"]) ) {
-    	$cpd = $_POST["cpd"];
-    	$nome = $_POST["nome"];
-    	$Telefone = $_POST["Telefone"];
-    	$curso = $_POST["Curso"];
-    	$Semestre = $_POST["semestre"];
-    	$Email = $_POST["Email"];
-    	$Senha = $_POST["Senha"];
-    	$conf_Senha = $_POST["conf_Senha"];
-    	if ($Senha == $conf_Senha) {
-    		$sen = $Senha;
-    	}else{
-    		die("Senha Incorreta!");
-    	}
-
-    }
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +46,7 @@
 				        </div>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link disabled" href="Cadastro.html">Cadastro</a>
+				        <a class="nav-link disabled" href="Cadastro.php">Cadastro</a>
 				      </li>
 				    </ul>
 				    <form class="form-inline my-2 my-lg-0">
@@ -80,7 +61,7 @@
 			<div class="wrapper">
 			  <h1>Registre-se!</h1>
 			  <p>Seu cadastro é fundamental e Obrigatório para que você possa lançar ou responder alguma dúvida!</p>
-			  <form class="form" method="post" action="yourpage.html">
+			  <form class="form" method="post" action="Cadastro.php">
 			  	  <input type="text" name="cpd" class="name" placeholder="CPD">
 			    <div>
 			      <p class="name-help">Por favor informe seu cpd.</p>
@@ -119,7 +100,31 @@
 </div>
 </body>
 </html>
+<?php
+		if ( isset($_POST["cpd"]) ) {
+    	$cpd = $_POST["cpd"];
+    	$nome = $_POST["nome"];
+    	$Telefone = $_POST["Telefone"];
+    	$curso = $_POST["Curso"];
+    	$Semestre = $_POST["semestre"];
+    	$Email = $_POST["Email"];
+    	$Senha = $_POST["Senha"];
+    	$conf_Senha = $_POST["conf_Senha"];
+    	if ($Senha == $conf_Senha) {
+    		$sen = $Senha;
+    	}else{
+    		die();
+    		$conf = ("Senhas não conferem!");
+    		print_r($conf);
+    	}
+    }
+    $inserir = "INSERT INTO usuario (CPD, Nome, Curso, Semestre, Telefone, Email, Senha) VALUES ($cpd, '$nome', '$curso', $Semestre, '$Telefone', '$Email', '$sen')";
 
+    $operacao_inser = mysqli_query($daniel, $inserir);
+    if(!$operacao_inser){
+    	die("Não foi efetuado a inserção");
+    }
+	?>
 <?php
 	mysqli_close($daniel);
 
